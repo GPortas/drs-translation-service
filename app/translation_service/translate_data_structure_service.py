@@ -6,7 +6,7 @@ logging.basicConfig(filename=logfile, level=loglevel)
 
 def translate_data_structure(package_path):
     org_project_name = os.path.basename(package_path).split(".")
-    package_path = org_project_name[0]
+    package_path = os.path.join(os.path.split(package_path)[0], org_project_name[0])
     #Project name is the doi-name
     #Batch name doi-name-batch
     batch_name= os.path.basename(package_path) + "-batch"
