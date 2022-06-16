@@ -1,4 +1,5 @@
 import os, os.path, logging, shutil
+from distutils import dir_util
 import translation_service.translate_data_structure_service as translate_data_structure_service
 from translation_service.batch_builder_assistant import BatchBuilderAssistant
 
@@ -27,7 +28,7 @@ def prepare_and_send_to_drs(package_dir, supplemental_deposit_data):
 
 def __move_batch_to_incoming(batch_dir):
     dropbox_path = os.getenv("DROPBOX_PATH")
-    shutil.copy(batch_dir, dropbox_path)
+    dir_util.copy_tree(batch_dir, dropbox_path)
     return os.path.join(dropbox_path, os.path.basename(batch_dir))   
 
 
