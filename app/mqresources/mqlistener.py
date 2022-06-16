@@ -74,7 +74,8 @@ class MqListener(stomp.ConnectionListener):
             #This calls a method to handle prepping the batch for
             #distribution to the DRS
             try:
-                translation_service.prepare_and_send_to_drs(os.path.join(self.message_data["destination_path"], self.message_data["package_id"]), self.message_data['admin_metadata'])
+                no_version_doi = self.message_data["package_id"].split(".")[0]
+                translation_service.prepare_and_send_to_drs(os.path.join(self.message_data["destination_path"], no_version_doi), self.message_data['admin_metadata'])
             except Exception:
                 mqutils.notify_ingest_status_process_message(self.message_data["package_id"], "failure")
                 logging.exception("Could not translate data structure for {}".format(self.message_data["destination_path"]))
