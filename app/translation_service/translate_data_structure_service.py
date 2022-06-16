@@ -7,7 +7,7 @@ logging.basicConfig(filename=logfile, level=loglevel)
 def translate_data_structure(package_path):
     #Project name is the doi-name
     #Batch name doi-name-batch
-    batch_name= os.path.basename(package_path) + "-batch"
+    batch_name = os.path.basename(package_path) + "-batch"
     batch_dir = os.path.join(package_path, batch_name)
     #Object name is the doi-name
     object_name= os.path.basename(package_path)
@@ -19,8 +19,8 @@ def translate_data_structure(package_path):
     #Make batch dir and object dir
     os.makedirs(object_dir, exist_ok=True)
     #Give permissions for DRS Services to write to batch dir
-    subprocess.call(['chmod', '-R', "775", batch_dir])
-    subprocess.call(['chgrp', '-R', "guestftp", batch_dir])
+    subprocess.call(['chmod', '-R', "775", object_dir])
+    subprocess.call(['chgrp', '-R', "guestftp", object_dir])
     #/package_path/extracted
     extracted_files_dir = os.path.join(package_path, "extracted")
     #/package_path/extracted/unzippeddir

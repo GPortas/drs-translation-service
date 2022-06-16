@@ -27,7 +27,7 @@ def prepare_and_send_to_drs(package_dir, supplemental_deposit_data):
 
 def __move_batch_to_incoming(batch_dir):
     dropbox_path = os.getenv("DROPBOX_PATH")
-    shutil.move(batch_dir, dropbox_path)
+    shutil.copy(batch_dir, dropbox_path)
     return os.path.join(dropbox_path, os.path.basename(batch_dir))   
 
 
