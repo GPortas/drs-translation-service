@@ -1,4 +1,4 @@
-import os, os.path, logging, shutil
+import os, os.path, logging, shutil, subprocess
 
 logfile=os.getenv('LOGFILE_PATH', 'drs_translation_service')
 loglevel=os.getenv('LOGLEVEL', 'WARNING')
@@ -18,6 +18,9 @@ def translate_data_structure(package_path):
     
     #Make batch dir and object dir
     os.makedirs(object_dir, exist_ok=True)
+    #Give permissions for DRS Services to write to batch dir
+    subprocess.call(['chmod', '-R', "775", batch_dir])
+    subprocess.call(['chgrp', '-R', "guestftp", batch_dir])
     #/package_path/extracted
     extracted_files_dir = os.path.join(package_path, "extracted")
     #/package_path/extracted/unzippeddir
